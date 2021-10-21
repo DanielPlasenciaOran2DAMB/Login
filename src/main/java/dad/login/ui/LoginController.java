@@ -1,5 +1,8 @@
 package dad.login.ui;
 
+import dad.login.auth.AuthService;
+import dad.login.auth.FileAuthService;
+import dad.login.auth.LdapAuthService;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -16,6 +19,7 @@ public class LoginController {
 
 		model.usuarioProperty().bind(view.getUsuarioText().textProperty());
 		model.passwordProperty().bind(view.getPasswordPass().textProperty());
+		model.ldapProperty().bindBidirectional(view.getLdapCheck().selectedProperty());
 
 		view.getAccederButton().setOnAction(e -> onAccederAction(e));
 		view.getCancelarButton().setOnAction(e -> onCancelarAction(e));
@@ -40,11 +44,22 @@ public class LoginController {
 	private void onAccederAction(ActionEvent e) {
 		boolean ldap = true;
 
-		if (view.getLdapCheck().isSelected()) {
+		AuthService auth = ldap ? new LdapAuthService() : new FileAuthService();
 
+		if (model.ldapProperty().equals(true)) {
+			try {
+				auth.login(model.usuarioProperty().toString(), model.passwordProperty().toString());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		} else {
 			if (view.getLdapCheck().isSelected()) {
+				Alert correctoAlert = new Alert(AlertType.INFORMATION);
+				correctoAlert.setTitle("Iniciar sesión");
+				correctoAlert.setHeaderText("Acceso permitido");
+				correctoAlert.setContentText("Las credenciales de acceso son válidas.");
 
+				correctoAlert.showAndWait();
 			} else {
 				Alert errorAlert = new Alert(AlertType.ERROR);
 				errorAlert.setTitle("Iniciar sesión");
