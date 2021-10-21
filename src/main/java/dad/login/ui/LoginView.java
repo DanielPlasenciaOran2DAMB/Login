@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 public class LoginView extends VBox {
 
 	private TextField usuarioText;
-	private PasswordField contraseñaPass;
+	private PasswordField passwordPass;
 	private CheckBox ldapCheck;
 	private Button accederButton, cancelarButton;
 
@@ -27,8 +27,8 @@ public class LoginView extends VBox {
 		usuarioText = new TextField();
 		usuarioText.setPromptText("Nombre de usuario");
 
-		contraseñaPass = new PasswordField();
-		contraseñaPass.setPromptText("Contraseña del usuario");
+		passwordPass = new PasswordField();
+		passwordPass.setPromptText("Contraseña del usuario");
 
 		ldapCheck = new CheckBox("Usar LDAP");
 
@@ -42,7 +42,7 @@ public class LoginView extends VBox {
 		loginPane.setVgap(5);
 		loginPane.setPadding(new Insets(5));
 		loginPane.addRow(0, new Label("Usuario: "), usuarioText);
-		loginPane.addRow(1, new Label("Contraseña: "), contraseñaPass);
+		loginPane.addRow(1, new Label("Contraseña: "), passwordPass);
 
 		ColumnConstraints[] cols = { new ColumnConstraints(), new ColumnConstraints() };
 		loginPane.getColumnConstraints().setAll(cols);
@@ -71,8 +71,8 @@ public class LoginView extends VBox {
 		return usuarioText;
 	}
 
-	public PasswordField getContraseñaPass() {
-		return contraseñaPass;
+	public PasswordField getPasswordPass() {
+		return passwordPass;
 	}
 
 	public CheckBox getLdapCheck() {

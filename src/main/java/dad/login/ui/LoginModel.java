@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 public class LoginModel {
 
 	private StringProperty usuario = new SimpleStringProperty();
-	private StringProperty contraseña = new SimpleStringProperty();
+	private StringProperty password = new SimpleStringProperty();
 
 	public final StringProperty usuarioProperty() {
 		return this.usuario;
@@ -20,16 +20,16 @@ public class LoginModel {
 		this.usuarioProperty().set(usuario);
 	}
 
-	public final StringProperty contraseñaProperty() {
-		return this.contraseña;
+	public final StringProperty passwordProperty() {
+		return this.password;
 	}
 
-	public final String getContraseña() {
-		return this.contraseñaProperty().get();
+	public final String getPassword() {
+		return this.passwordProperty().get();
 	}
 
-	public final void setContraseña(final String contraseña) {
-		this.contraseñaProperty().set(contraseña);
+	public final void setPassword(final String password) {
+		this.passwordProperty().set(password);
 	}
 
 }

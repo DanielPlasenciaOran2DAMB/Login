@@ -1,8 +1,5 @@
 package dad.login.ui;
 
-import java.io.IOException;
-import java.net.URL;
-
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,7 +15,7 @@ public class LoginController {
 		this.primaryStage = primaryStage;
 
 		model.usuarioProperty().bind(view.getUsuarioText().textProperty());
-		model.contraseñaProperty().bind(view.getContraseñaPass().textProperty());
+		model.passwordProperty().bind(view.getPasswordPass().textProperty());
 
 		view.getAccederButton().setOnAction(e -> onAccederAction(e));
 		view.getCancelarButton().setOnAction(e -> onCancelarAction(e));
@@ -41,6 +38,7 @@ public class LoginController {
 	}
 
 	private void onAccederAction(ActionEvent e) {
+		boolean ldap = true;
 
 		if (view.getLdapCheck().isSelected()) {
 
@@ -57,7 +55,7 @@ public class LoginController {
 
 				view.getUsuarioText().clear();
 
-				view.getContraseñaPass().clear();
+				view.getPasswordPass().clear();
 			}
 		}
 	}
