@@ -46,7 +46,7 @@ public class LoginController {
 		AuthService auth = model.isLdap() ? new LdapAuthService() : new FileAuthService();
 
 		try {
-			if (auth.login(model.getUsuario(), model.getPassword())) {
+			if (auth.login(model.getUsuario(), model.getPassword()) == true) {
 				Alert correctoAlert = new Alert(AlertType.INFORMATION);
 				correctoAlert.setTitle("Iniciar sesión");
 				correctoAlert.setHeaderText("Acceso permitido");
@@ -61,7 +61,7 @@ public class LoginController {
 				view.getUsuarioText().clear();
 				view.getPasswordPass().clear();
 			}
-			
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
