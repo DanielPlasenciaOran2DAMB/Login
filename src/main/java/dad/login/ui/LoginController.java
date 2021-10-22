@@ -42,36 +42,28 @@ public class LoginController {
 	}
 
 	private void onAccederAction(ActionEvent e) {
-		boolean ldap = true;
 
-		AuthService auth = ldap ? new LdapAuthService() : new FileAuthService();
+		AuthService auth = model.isLdap() ? new LdapAuthService() : new FileAuthService();
 
-		if (model.ldapProperty().equals(true)) {
-			try {
-				auth.login(model.usuarioProperty().toString(), model.passwordProperty().toString());
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		} else {
-			if (view.getLdapCheck().isSelected()) {
+		try {
+			if (auth.login(model.getUsuario(), model.getPassword())) {
 				Alert correctoAlert = new Alert(AlertType.INFORMATION);
 				correctoAlert.setTitle("Iniciar sesión");
 				correctoAlert.setHeaderText("Acceso permitido");
 				correctoAlert.setContentText("Las credenciales de acceso son válidas.");
-
 				correctoAlert.showAndWait();
 			} else {
 				Alert errorAlert = new Alert(AlertType.ERROR);
 				errorAlert.setTitle("Iniciar sesión");
 				errorAlert.setHeaderText("Acceso denegado");
 				errorAlert.setContentText("El usuario y/o la contraseña no son válidos.");
-
 				errorAlert.showAndWait();
-
 				view.getUsuarioText().clear();
-
 				view.getPasswordPass().clear();
 			}
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 	}
 }
